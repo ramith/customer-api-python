@@ -1,6 +1,11 @@
 from flask import Flask, jsonify, request, abort
+import logging
 
 app = Flask(__name__)
+
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 # Dummy database for demonstration purposes
 customers = {
@@ -13,6 +18,7 @@ def get_customer_by_id(accountId):
     """
     Retrieve a customer by account id.
     """
+    app.logger.info(f"Retrieving customer with ID: {accountId}")  # Log the customer ID
     customer = customers.get(accountId)
     if not customer:
         # If the customer is not found, return a 404 error
